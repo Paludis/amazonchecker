@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from datetime import datetime
 import sys
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -63,7 +63,7 @@ def run(url, refresh_interval):
         try:
             buy_now = driver.find_element_by_id("buy-now-button")
         except NoSuchElementException:
-            print("ITEM OUT OF STOCK. REFRESH")
+            print(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " ITEM OUT OF STOCK. REFRESH")
             time.sleep(refresh_interval)
             continue
         else:
