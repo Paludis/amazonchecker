@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 import sys
+from random import randint
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
@@ -11,7 +13,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 
-def run(url, refresh_interval):
+def run(url, refresh_interval_min, refresh_interval_max):
 
     try:
         f = open("pw.txt", "r")
@@ -64,7 +66,7 @@ def run(url, refresh_interval):
             buy_now = driver.find_element_by_id("buy-now-button")
         except NoSuchElementException:
             print(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " ITEM OUT OF STOCK. REFRESH")
-            time.sleep(refresh_interval)
+            time.sleep(randint(refresh_interval_min, refresh_interval_max))
             continue
         else:
             print("ITEM IN STOCK!!! BUY!!!")
